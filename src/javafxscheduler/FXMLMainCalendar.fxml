@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="javafxscheduler.FXMLMainCalendarController">
+   <children>
+      <MenuBar fx:id="menuBar" layoutX="7.0" layoutY="7.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <menus>
+          <Menu fx:id="accountMenu" text="Account">
+            <items>
+                  <MenuItem fx:id="changeUsernameMenuItem" mnemonicParsing="false" text="Change Username" />
+              <MenuItem fx:id="changePasswordMenuItem" mnemonicParsing="false" text="Change Password" />
+                  <MenuItem fx:id="accountDetailMenuItem" mnemonicParsing="false" text="Account Detail" />
+                  <MenuItem fx:id="logoutMenuItem" mnemonicParsing="false" text="Log Out" />
+            </items>
+          </Menu>
+          <Menu fx:id="appointmentMenu" mnemonicParsing="false" text="Appointment">
+            <items>
+              <MenuItem fx:id="makeAppointmentMenuItem" mnemonicParsing="false" text="Make Appointment" />
+                  <MenuItem fx:id="cancelAppointmentMenuItem" mnemonicParsing="false" text="Cancel Appointment" />
+                  <MenuItem fx:id="changeAppointmentMenuItem" mnemonicParsing="false" text="Change Appointment" />
+            </items>
+          </Menu>
+          <Menu fx:id="settingMenu" mnemonicParsing="false" text="Setting">
+            <items>
+              <MenuItem fx:id="setCalenarRangeMenuItem" mnemonicParsing="false" text="Set Calendar Range" />
+                  <MenuItem fx:id="setCalendarColorMenuItem" mnemonicParsing="false" text="Set Calendar Color" />
+            </items>
+          </Menu>
+            <Menu fx:id="helpMenu" mnemonicParsing="false" text="Help">
+              <items>
+                <MenuItem mnemonicParsing="false" text="Action 1" />
+              </items>
+            </Menu>
+        </menus>
+      </MenuBar>
+   </children>
+</AnchorPane>
