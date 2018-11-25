@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package javafxscheduler;
-
+import java.sql.SQLException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,6 +15,7 @@ import javafx.stage.Stage;
  *
  * @author chinhnguyen
  */
+
 public class JavaFxScheduler extends Application {
     
     @Override
@@ -27,10 +28,11 @@ public class JavaFxScheduler extends Application {
         stage.show();
     }
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ClassNotFoundException, SQLException {
+        DatabaseHandler db = new DatabaseHandler(); 
+        //Create a database for the calendar if it's not existed yet. 
+        db.createDatabase();
+        //Launch the UI
         launch(args);
     }
     

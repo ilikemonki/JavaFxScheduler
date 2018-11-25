@@ -12,8 +12,8 @@
    <children>
       <VBox prefHeight="200.0" prefWidth="100.0" spacing="70.0" AnchorPane.bottomAnchor="27.0" AnchorPane.leftAnchor="450.0" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="150.0">
          <children>
-            <TextField fx:id="usernameTextField" alignment="CENTER" promptText="Username" />
-            <TextField fx:id="passwordTextField" alignment="CENTER" promptText="Password" />
+            <TextField fx:id="usernameTextField" alignment="CENTER" onAction="#loginButtonPushed" promptText="Username" />
+            <TextField fx:id="passwordTextField" alignment="CENTER" onAction="#loginButtonPushed" promptText="Password" />
             <Button fx:id="loginButton" mnemonicParsing="false" onAction="#loginButtonPushed" prefHeight="27.0" prefWidth="218.0" text="Log In" />
          </children>
          <padding>
