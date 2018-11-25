@@ -61,6 +61,8 @@ public class FXMLLoginController implements Initializable {
      * If failed, warning scene appears.
      */
     public void loginButtonPushed (ActionEvent event) { 
+        String usernameAttempt = usernameTextField.getText();
+        String passwordAttempt = passwordTextField.getText();
         /*
         * Check if username or password fields are empty
         */
@@ -75,8 +77,6 @@ public class FXMLLoginController implements Initializable {
             /*
             * Verify username and password  
             */
-            String usernameAttempt = usernameTextField.getText();
-            String passwordAttempt = passwordTextField.getText();
             DatabaseHandler userDB = new DatabaseHandler();
             boolean verified = false; 
 
@@ -99,39 +99,42 @@ public class FXMLLoginController implements Initializable {
             }
 
             //If user is in the database
-            if (verified == true) {
-                try {
-                    /*
-                    * Switch to Main Calendar Scene
-                    */
-                    Parent mainCalendarParent = FXMLLoader.load(getClass().getResource("FXMLMainCalendar.fxml"));
-                    Scene mainCalendarScene = new Scene(mainCalendarParent);
+            try {
+                if (verified == true) {
+                        /*
+                        * Switch to Main Calendar Scene
+                        */
+                        FXMLLoader loader = new FXMLLoader(); 
+                        loader.setLocation(getClass().getResource("FXMLMainCalendar.fxml"));
+                        Parent mainCalendarParent = loader.load(); 
+                        Scene mainCalendarScene = new Scene(mainCalendarParent);
 
-                    //This line gets stage informaion
-                    Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-
-                    window.setScene(mainCalendarScene);
-                    window.show();
+                        //Access the controller and call a method
+                        FXMLMainCalendarController mcController = loader.getController();
+                        
+                        //Create passingUser to store current login information 
+                        // and pass that to the Main Calendar Scene. 
+                        User passUser = new User(); 
+                        passUser.setUsername(usernameAttempt);
+                        passUser.setPassword(passwordAttempt);
+                        mcController.initCurrentUser(passUser);
+                        
+                        //This line gets stage informaion
+                        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+                        window.setScene(mainCalendarScene);
+                        window.show();
+                    }
+            
+            //If user is not in database, alert box appears.
+                else {
+                        Alert errorAlert = new Alert(Alert.AlertType.ERROR);
+                        errorAlert.setHeaderText("No Account is found");
+                        errorAlert.setContentText("Please login with other username or password.");
+                        errorAlert.showAndWait();
+                    } 
                 } catch (IOException ex) {
-                    System.out.println("Switching to Main Calendar Scene error: " + ex);
+                    System.out.println("User verified error: " + ex);
                 }
-            }
-
-            //Else warning scene pops up
-            else {
-                try {
-                    Parent mainCalendarParent = FXMLLoader.load(getClass().getResource("FXMLPopUp.fxml"));
-                    Scene mainCalendarScene = new Scene(mainCalendarParent);
-
-                    //This line gets stage informaion
-                    Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-
-                    window.setScene(mainCalendarScene);
-                    window.show();
-                } catch (IOException ex) {
-                    System.out.println("Switching to Pop Up Warning error: " + ex);
-                }
-            } 
         }
     }
     

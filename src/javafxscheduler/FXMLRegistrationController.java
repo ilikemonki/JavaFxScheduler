@@ -103,7 +103,7 @@ public class FXMLRegistrationController implements Initializable {
                 db.connect_CALENDAR();
                 PreparedStatement pstmt;
                 String query; 
-                boolean newUser;
+                boolean usedEmail, usedUsername;
                 
                 /**
                  * Check if email is already in the system.
@@ -114,21 +114,47 @@ public class FXMLRegistrationController implements Initializable {
                 ResultSet rs = pstmt.executeQuery(); 
                 if (rs.next()) {
                     //Found existing user in the database based on Email.
-                    newUser = false; 
+                    usedEmail = true; 
                 }
                 else 
-                    newUser = true; 
+                    usedEmail = false; 
                 
-                if (newUser == false) {
+                //Alert if email is already in the system. 
+                if (usedEmail == true) {
                     Alert errorAlert = new Alert(AlertType.ERROR);
                     errorAlert.setHeaderText("Email found");
-                    errorAlert.setContentText("Please login with your username and password.");
+                    errorAlert.setContentText("Please choose another email or login.");
                     errorAlert.showAndWait();
                 }
                 
+                /**
+                 * Check if username is already in the system.
+                 */
+                query = "SELECT * FROM USERS WHERE USERNAME=?";
+                pstmt = db.conn.prepareStatement(query); 
+                pstmt.setString(1, emailTextField.getText());
+                rs = pstmt.executeQuery(); 
+                if (rs.next()) {
+                    //Found existing user in the database based on Email.
+                    usedUsername = true; 
+                }
+                else 
+                    usedUsername = false; 
+                
+                //Alert if email is already in the system. 
+                if (usedUsername == true) {
+                    Alert errorAlert = new Alert(AlertType.ERROR);
+                    errorAlert.setHeaderText("Username found");
+                    errorAlert.setContentText("Please choose another username or login.");
+                    errorAlert.showAndWait();
+                }
+                
+                /**
+                 * Check if email is already in the system.
+                 */
                 
                 //New User
-                if (newUser == true) {
+                if (usedEmail == false && usedUsername == false) {
                     /**
                      * If user is not in the database, save user's data into database Calendar
                      */ 

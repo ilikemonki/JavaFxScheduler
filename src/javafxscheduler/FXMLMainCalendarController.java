@@ -11,6 +11,7 @@ import javafx.scene.control.MenuItem;
 
 public class FXMLMainCalendarController implements Initializable {
 
+    //All items in Main Calendar Scene
     @FXML private MenuBar menuBar; 
     @FXML private Menu accountMenu; 
     @FXML private Menu appointmentMenu; 
@@ -26,15 +27,22 @@ public class FXMLMainCalendarController implements Initializable {
     @FXML private MenuItem setCalenarRangeMenuItem;
     @FXML private MenuItem setCalendarColorMenuItem;
     
+    //Store current user data. 
+    private User currentUser;
+    
+    /**
+     * When this method is called, currentUser's fields are initialized. 
+     */
+    public void initCurrentUser (User passUser) 
+    {
+        currentUser = passUser;
+        System.out.println(currentUser.getUsername() + " -- " + currentUser.getPassword());
+    }
+    
     
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-       
-        
-        
-        
     }    
     
 }
